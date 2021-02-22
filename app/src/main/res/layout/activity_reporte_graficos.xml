@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ventanaReportesGraficos"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReporteGraficos">
+
+    <TextView
+        android:id="@+id/principalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="REPORTE DE COLORES USADOS"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498" />
+
+    <ScrollView
+       android:id="@+id/reporteColores"
+        android:layout_width="match_parent"
+        android:layout_height="223dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/colores"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="COLOR"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/coloresCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="CANTIDAD DE USOS"
+                    android:textSize="15dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/azul"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Azul" />
+
+                <TextView
+                    android:id="@+id/azulCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/rojo"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Rojo" />
+
+                <TextView
+                    android:id="@+id/rojoCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/verde"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Verde" />
+
+                <TextView
+                    android:id="@+id/verdeCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/amarillo"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Amarillo" />
+
+                <TextView
+                    android:id="@+id/amarilloCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/naranja"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Naranja" />
+
+                <TextView
+                    android:id="@+id/naranjaCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/morado"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Morado" />
+
+                <TextView
+                    android:id="@+id/moradoCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/cafe"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Cafe" />
+
+                <TextView
+                    android:id="@+id/cafeCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/negro"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Negro" />
+
+                <TextView
+                    android:id="@+id/negroCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/principalText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="REPORTE DE OBJETOS USADOS"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498" />
+
+    <ScrollView
+        android:id="@+id/reporteObjetos"
+        android:layout_width="match_parent"
+        android:layout_height="155dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/objetos"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="OBJETOS"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/objetosCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="CANTIDAD DE USOS"
+                    android:textSize="15dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/circulo"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Circulo" />
+
+                <TextView
+                    android:id="@+id/circuloCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/cuadrado"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Cuadrado" />
+
+                <TextView
+                    android:id="@+id/cuadradoCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/rectangulo"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Rectangulo" />
+
+                <TextView
+                    android:id="@+id/rectangulCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/linea"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Linea" />
+
+                <TextView
+                    android:id="@+id/lineaCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/poligono"
+                    android:layout_width="209dp"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:text="Poligono" />
+
+                <TextView
+                    android:id="@+id/poligonoCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/principalText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="REPORTE DE ANIMACIONES USADAS"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498" />
+
+    <ScrollView
+        android:id="@+id/reporteAnimaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/animacion"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="ANIMACION"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/animacionCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="CANTIDAD DE USOS"
+                    android:textSize="15dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/lineaAnim"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Linea" />
+
+                <TextView
+                    android:id="@+id/lineaAnimCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/curva"
+                    android:layout_width="209dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:text="Curva" />
+
+                <TextView
+                    android:id="@+id/curvaCant"
+                    android:layout_width="202dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>

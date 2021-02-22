@@ -1,0 +1,314 @@
+
+package gramatica;
+import java_cup.runtime.*;
+import objetos.*;
+import reportes.*;
+import java.util.ArrayList;
+
+
+parser code {:
+    /*---------------------------------------CODIGO EJECUTABLE--------------------------------------------*/
+    
+   
+    public parser(AnalizadorLexico lex){
+        super(lex);
+      
+        
+    }
+
+    public void setAccion(String tipo, String mensaje, String accion){
+        System.out.println(tipo+" "+mensaje);
+    }
+
+    public void syntax_error(Symbol s){
+        setAccion("ERROR", "Error sintaxis columna: "+s.right+" fila: "+s.left,"");   
+    }
+    
+    ArrayList <Circulo> circulos = new ArrayList<>();
+    ArrayList <Cuadrado> cuadrados = new ArrayList<>();
+    ArrayList <Rectangulo> rectangulos = new ArrayList<>();
+    ArrayList <Poligono> poligonos = new ArrayList<>();
+    ArrayList <Linea> lineas = new ArrayList<>();
+    ArrayList <Animacion> animaciones = new ArrayList<>();
+    
+        /******************* REPORTE DE COLORES **********************/ 
+        int azul = 0;
+        int rojo =0;
+        int verde = 0;
+        int amarillo =0;
+        int naranja =0;
+        int morado = 0;
+        int cafe =0;
+        int negro =0;
+        ReporteColores reporteCantColores = new ReporteColores(azul, rojo, verde, amarillo, naranja, morado, cafe, negro);
+       /******************* REPORTE DE FORMAS **********************/ 
+       int cantCirculos =0;
+       int cantCuadrados = 0;
+       int cantRectangulos =0;
+       int cantLineas =0;
+       int cantPoligonos=0;
+       ReporteFormas reporteCantFormas = new ReporteFormas(cantCirculos, cantCuadrados, cantRectangulos, cantLineas, cantPoligonos);
+         /******************* REPORTE DE ANIMACIONES **********************/ 
+       
+                int cantAnimLinea =0;
+                int cantAnimCurva =0;
+                ReporteAnimaciones reporteCantAnimaciones = new ReporteAnimaciones(cantAnimLinea, cantAnimCurva);
+      
+
+:}
+
+    terminal coma, mas, menos, por, div, parentesis_a, parentesis_b, color, 
+		linea, curva, graficar, animar, objeto, anterior, circulo, cuadrado, rectangulo, poligono, numero, residuo, umenos, umas;
+
+    non terminal INICIO, A, ACCION, ANIMAR;
+    
+    non terminal Circulo PARAM_CIRCULO;
+
+    non terminal Cuadrado PARAM_CUADRADO;
+
+    non terminal Rectangulo PARAM_RECTANGULO;
+
+    non terminal Poligono PARAM_POLIGONO;
+
+    non terminal Linea PARAM_LINEA;
+
+    non terminal Animacion PARAM_ANIMACION;
+    
+    non terminal Integer POS_X, POS_Y, RADIO, LADO, ALTO, ANCHO, LADOS, POS_DX, POS_DY;
+
+    non terminal ArrayList<String> PARAMETROS;
+    
+    non terminal String COLOR, TIPO_ANIMACION;
+    
+    non terminal Integer NUM, OPERACION;
+  
+
+
+ precedence left mas, menos;
+ precedence left por, div;
+ precedence left parentesis_a, parentesis_b;
+ precedence left umenos, umas;
+ 
+
+ start with INICIO;
+    
+	INICIO ::= A
+	|	error {: System.out.println("Error tipo: SINTACTICO, Posible error debido a una mal definicion en un metodo.\n");  :}
+        ;   
+
+
+	A ::= ACCION A
+	|       ACCION ANIMAR A
+        |       ACCION ANIMAR
+        |       ACCION
+	;
+
+
+	ACCION ::= graficar circulo parentesis_a PARAM_CIRCULO:circulo parentesis_b
+        {:
+             cantCirculos++;
+            reporteCantFormas.setCirculos(cantCirculos);
+            circulos.add(circulo);
+            RESULT = circulo;    
+            System.out.printf("graficar circulo\n");     
+            System.out.printf(" Posicion X: %d, Posicion Y: %d Radio: %d, Color: %s\n\n",circulo.getPos_x(), circulo.getPos_y(), circulo.getRadio(), circulo.getColor());
+           
+        :}
+
+        |       graficar cuadrado parentesis_a PARAM_CUADRADO:cuadrado parentesis_b 
+        {:  
+            cantCuadrados++;
+            reporteCantFormas.setCuadrados(cantCuadrados);
+            cuadrados.add(cuadrado);
+            RESULT = cuadrado;    
+               System.out.printf("graficar cuadrado\n");
+            System.out.printf(" Pos X: %d, Pos Y: %d Lado: %d, Color: %s\n\n",cuadrado.getPos_x(), cuadrado.getPos_y(), cuadrado.getLado(), cuadrado.getColor());
+                 
+        :}
+        
+        |       graficar rectangulo parentesis_a PARAM_RECTANGULO:rectangulo parentesis_b
+        {:
+            cantRectangulos++;
+            reporteCantFormas.setRectangulos(cantRectangulos);
+            rectangulos.add(rectangulo);
+            RESULT = rectangulo;    
+               System.out.printf("graficar rectangulo\n");  
+               System.out.printf("Pos x: %d, Pos y: %d, Alto: %d, Ancho: %d, Color: %s\n\n", rectangulo.getPos_x(), rectangulo.getPos_y(), rectangulo.getAlto(),rectangulo.getAncho(), rectangulo.getColor()); 
+                
+               
+          
+        :}
+
+         
+	|     	graficar poligono parentesis_a PARAM_POLIGONO:poligono parentesis_b
+        {:
+            cantPoligonos++;
+            reporteCantFormas.setPoligonos(cantPoligonos);
+            poligonos.add(poligono);
+            RESULT = poligono;    
+               System.out.printf("graficar poligono\n");   
+            System.out.printf("Pos x: %d, Pos y: %d, Alto: %d, Ancho: %d, Cant Lados: %d, Color: %s\n\n", poligono.getPos_x(), poligono.getPos_y(), poligono.getAlto(),poligono.getAncho(), poligono.getLados(), poligono.getColor()); 
+        :}
+
+        |     	graficar linea parentesis_a PARAM_LINEA:linea parentesis_b
+        {:
+            cantLineas++;
+            reporteCantFormas.setLineas(cantLineas);
+            lineas.add(linea);
+            RESULT = linea;    
+            System.out.printf("graficar linea\n");
+            System.out.printf("Pos x: %d, Pos y: %d, DestinoX: %d, DestinoY: %d, Color: %s\n\n", linea.getPos_x(), linea.getPos_y(), linea.getPos_dx(), linea.getPos_dy(), linea.getColor());      
+       
+        :}
+        ;
+
+	ANIMAR ::= animar objeto anterior parentesis_a PARAM_ANIMACION:animacion parentesis_b 
+        {:
+        animaciones.add(animacion);
+        RESULT = animacion;
+        
+          System.out.printf("animar objeto anterior\n");
+        System.out.printf("DestinoX: %d, DestinoY: %d, Tipo Animacion: %s\n\n", animacion.getDestinoX(),animacion.getDestinoY(), animacion.getTipoAnimacion());      
+      
+        :}     	
+	;
+
+	/*********************PARAMETROS CIRCULO***************************/
+	PARAM_CIRCULO ::= POS_X:x coma POS_Y:y coma RADIO:r coma COLOR:clr 
+	{:
+        
+        RESULT = new Circulo(x,y,r,clr);
+      
+        :}
+	;
+        
+        /*********************PARAMETROS CUADRADO***************************/
+        PARAM_CUADRADO ::= POS_X:x coma POS_Y:y coma LADO:l coma COLOR:clr 
+	{:
+            RESULT = new Cuadrado(x,y,l,clr);
+        :}
+	;
+
+        /*********************PARAMETROS RECTANGULO***************************/
+        PARAM_RECTANGULO ::= POS_X:x coma POS_Y:y coma ALTO:h coma ANCHO:b coma COLOR:clr 
+	{:
+                RESULT = new Rectangulo(x,y,h,b,clr);
+        :}
+	;
+
+        /*********************PARAMETROS POLIGONO***************************/
+        PARAM_POLIGONO ::= POS_X:x coma POS_Y:y coma ALTO:h coma ANCHO:b coma LADOS:l coma COLOR:clr 
+	{:
+                
+                RESULT = new Poligono(x,y,h,b,l,clr);
+        
+        :}
+	;
+
+         /*********************PARAMETROS LINEA***************************/
+        PARAM_LINEA ::= POS_X:x coma POS_Y:y coma POS_DX:dx coma POS_DY:dy coma COLOR:clr 
+	{:
+                
+                RESULT = new Linea(x,y,dx,dy,clr);
+        :}
+	;
+
+        
+        
+        PARAM_ANIMACION ::= POS_DX:dx coma POS_DY:dy coma TIPO_ANIMACION:tipoAnima 
+	{:
+                
+                RESULT = new Animacion(dx,dy,tipoAnima);
+        :}
+	;
+	
+    
+
+
+
+	POS_X ::= OPERACION:a {: RESULT=a;
+        System.out.printf("Operaciones POS_X: %d\n", (Integer)a); :} ;
+
+	POS_Y ::= OPERACION:a {: RESULT=a;
+        System.out.printf("Operaciones POS_Y: %d\n", (Integer)a); :} ;
+
+	RADIO ::= OPERACION:a {: RESULT=a; 
+        System.out.printf("Operaciones RADIO: %d\n", (Integer)a); :} ;
+
+        LADO ::= OPERACION:a {: RESULT=a; 
+        System.out.printf("Operaciones LADO: %d\n", (Integer)a); :} ;
+
+        ALTO ::= OPERACION:a {: RESULT=a; 
+        System.out.printf("Operaciones ALTO: %d\n", (Integer)a); :} ;
+
+	ANCHO ::= OPERACION:a {: RESULT=a; 
+        System.out.printf("Operaciones ANCHO: %d\n", (Integer)a); :} ;
+
+        LADOS ::= OPERACION:a {: RESULT=a; 
+        System.out.printf("Operaciones Cant LADOS: %d\n", (Integer)a); :} ;
+	
+        POS_DX ::= OPERACION:a {: RESULT=a;
+        System.out.printf("Operaciones POS_DX: %d\n", (Integer)a); :} ;
+
+	POS_DY ::= OPERACION:a {: RESULT=a;
+        System.out.printf("Operaciones POS_DY: %d\n", (Integer)a); :} ;
+
+
+	COLOR  ::=  color:clr
+	{: 
+        if (clr.equals("azul")) {
+            azul++;
+            reporteCantColores.setAzul(azul);
+        } else if (clr.equals("rojo")) {
+            rojo++;
+            reporteCantColores.setRojo(rojo);
+        } else if (clr.equals("verde")) {
+            verde++;
+            reporteCantColores.setVerde(verde);
+        } else if (clr.equals("amarillo")) {
+            amarillo++;
+            reporteCantColores.setAmarillo(amarillo);
+        } else if (clr.equals("naranja")) {
+            naranja++;
+            reporteCantColores.setNaranja(naranja);
+        } else if (clr.equals("morado")) {
+            morado++;
+            reporteCantColores.setMorado(morado);
+        } else if (clr.equals("cafe")) {
+            cafe++;
+            reporteCantColores.setCafe(cafe);          
+        } else if (clr.equals("negro")) {
+            negro++;
+            reporteCantColores.setNegro(negro);
+        }
+        RESULT = (String)clr; :}
+        ;
+
+
+        TIPO_ANIMACION  ::=  linea:tipoAnima
+	{: 
+            cantAnimLinea++;
+            reporteCantAnimaciones.setCantAnimacionesLinea(cantAnimLinea);
+            RESULT = (String)tipoAnima; 
+        :}
+        |       curva:tipoAnima
+        {: cantAnimCurva++;
+          reporteCantAnimaciones.setCantAnimacionesCurva(cantAnimCurva);
+          RESULT = (String)tipoAnima; 
+        :} 
+        ;
+
+	OPERACION ::= OPERACION:a mas OPERACION:b {:  RESULT = a + b; :}
+	|    OPERACION:a menos OPERACION:b {:  RESULT = a - b; :}
+	|    OPERACION:a por OPERACION:b {:  RESULT = a * b; :}
+	|    OPERACION:a div OPERACION:b {:  RESULT = a / b; :}
+        |   menos OPERACION:b   {: RESULT = -b; :} %prec umenos
+        |   mas OPERACION:b   {: RESULT = b; :} %prec umas
+        |   parentesis_a OPERACION:a parentesis_b {: RESULT=a; :}
+	|    NUM:a {: RESULT= a; :}
+        ;
+
+	NUM ::= numero:a {:  RESULT = (Integer)a;
+        //System.out.printf("Numero: %d\n", (Integer)a); 
+         :}
+        ;
