@@ -1,0 +1,61 @@
+Analisis Lexico
+
+
+/*Identificadores*/
+
+Numero = [0-9]
+Letra = [a-zA-Z]
+Tab = \t | "    "
+Enter = \n
+Salto = \r
+Espacio1 = [ \f]
+Espacio = {Salto} | {Espacio1}
+
+
+/* Simbolo Reservado de Separacion de Parametros */
+    "," 	                                	        {coma}
+/* Simbolos de Operacion */
+    "+"                                             	        {simbolo de suma}
+    "-"                                             	        {simbolo de resta}
+    "*"                                             	        {simbolo de multiplicacion}
+    "/"                                             	        {simbolo de division}
+    	
+    "("                                             	        {simbolo de parentesis abierto}
+    ")"     		                            	        {simbolo de parentesis cerrado}
+
+/* Palabras Reservadas de Color*/	
+    "azul"                                          	        {color}
+    "rojo"                                          	        {color}
+    "verde"                                         	        {color}
+    "amarillo"                                      	        {color}
+    "naranja"                                       	        {color}
+    "morado"                                        	        {color}
+    "cafe"                                          	        {color}
+    "negro"      						{color}
+/* Palabras Reservadas de Animaciones*/ 
+    "linea"                                         		{tipo de animacion}
+    "curva"   					   		{tipo de animacion}
+
+/* Palabras Reservadas de Acciones*/
+    "graficar"                                                  {palabra reservada}
+    "animar"                                                    {palabra reservada}
+    "objeto"                                   	                {palabra reservada}
+    "anterior"                                                  {palabra reservada}
+ 
+/* Palabras Reservadas de Formas*/
+    "circulo"                                                   {figura geometrica}
+    "cuadrado"                                                 	{figura geometrica}
+    "rectangulo"                                                {figura geometrica}
+    "poligono"                                                  {figura geometrica}
+
+/* Saltos de Linea */
+    {Tab}                                                   	{ignorar} 
+    {Enter}                                                 	{ignorar}
+    {Espacio}+                                            	{ignorar}
+    
+/* Numeros */
+    {Numero}+                                               	{numero}
+    
+}   
+    [^]                                                     	{residuo}
+

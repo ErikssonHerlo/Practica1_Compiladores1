@@ -1,0 +1,196 @@
+Analisis Sintactico
+
+PRODUCCIONES:
+
+    terminal coma, mas, menos, por, div, parentesis_a, parentesis_b, color, 
+		linea, curva, graficar, animar, objeto, anterior, circulo, cuadrado, rectangulo, poligono, numero, residuo, umenos, umas;
+
+    non terminal INICIO, A, ACCION, ANIMAR;
+    
+    non terminal Circulo PARAM_CIRCULO;
+
+    non terminal Cuadrado PARAM_CUADRADO;
+
+    non terminal Rectangulo PARAM_RECTANGULO;
+
+    non terminal Poligono PARAM_POLIGONO;
+
+    non terminal Linea PARAM_LINEA;
+
+    non terminal Animacion PARAM_ANIMACION;
+    
+    non terminal Integer POS_X, POS_Y, RADIO, LADO, ALTO, ANCHO, LADOS, POS_DX, POS_DY;
+
+    non terminal ArrayList<String> PARAMETROS;
+    
+    non terminal String COLOR, TIPO_ANIMACION;
+    
+    non terminal Integer NUM, OPERACION;
+  
+
+
+ precedence left mas, menos;
+ precedence left por, div;
+ precedence left parentesis_a, parentesis_b;
+ precedence left umenos, umas;
+ 
+
+ start with INICIO;
+    
+	INICIO ::= A
+	|	error {:Error Sintactico  :}
+        ;   
+
+
+	A ::= ACCION A
+	|       ACCION ANIMAR A
+        |       ACCION ANIMAR
+        |       ACCION
+	;
+
+
+	ACCION ::= graficar circulo parentesis_a PARAM_CIRCULO:circulo parentesis_b
+        {:
+                 RESULT = circulo;    
+            
+        :}
+
+        |       graficar cuadrado parentesis_a PARAM_CUADRADO:cuadrado parentesis_b 
+        {:  
+            	RESULT = cuadrado;    
+           
+                 
+        :}
+        
+        |       graficar rectangulo parentesis_a PARAM_RECTANGULO:rectangulo parentesis_b
+        {:
+            
+            RESULT = rectangulo;    
+            
+        :}
+
+         
+	|     	graficar poligono parentesis_a PARAM_POLIGONO:poligono parentesis_b
+        {:
+           
+            RESULT = poligono;    
+               :}
+
+        |     	graficar linea parentesis_a PARAM_LINEA:linea parentesis_b
+        {:
+          
+            RESULT = linea;    
+        
+        :}
+        ;
+
+	ANIMAR ::= animar objeto anterior parentesis_a PARAM_ANIMACION:animacion parentesis_b 
+        {:
+        
+        RESULT = animacion;
+             
+      
+        :}     	
+	;
+
+	/*********************PARAMETROS CIRCULO***************************/
+	PARAM_CIRCULO ::= POS_X:x coma POS_Y:y coma RADIO:r coma COLOR:clr 
+	{:
+        
+        RESULT = new Circulo(x,y,r,clr);
+      
+        :}
+	;
+        
+        /*********************PARAMETROS CUADRADO***************************/
+        PARAM_CUADRADO ::= POS_X:x coma POS_Y:y coma LADO:l coma COLOR:clr 
+	{:
+            RESULT = new Cuadrado(x,y,l,clr);
+        :}
+	;
+
+        /*********************PARAMETROS RECTANGULO***************************/
+        PARAM_RECTANGULO ::= POS_X:x coma POS_Y:y coma ALTO:h coma ANCHO:b coma COLOR:clr 
+	{:
+                RESULT = new Rectangulo(x,y,h,b,clr);
+        :}
+	;
+
+        /*********************PARAMETROS POLIGONO***************************/
+        PARAM_POLIGONO ::= POS_X:x coma POS_Y:y coma ALTO:h coma ANCHO:b coma LADOS:l coma COLOR:clr 
+	{:
+                
+                RESULT = new Poligono(x,y,h,b,l,clr);
+        
+        :}
+	;
+
+         /*********************PARAMETROS LINEA***************************/
+        PARAM_LINEA ::= POS_X:x coma POS_Y:y coma POS_DX:dx coma POS_DY:dy coma COLOR:clr 
+	{:
+                
+                RESULT = new Linea(x,y,dx,dy,clr);
+        :}
+	;
+
+        
+        
+        PARAM_ANIMACION ::= POS_DX:dx coma POS_DY:dy coma TIPO_ANIMACION:tipoAnima 
+	{:
+                
+                RESULT = new Animacion(dx,dy,tipoAnima);
+        :}
+	;
+	
+    
+
+
+
+	POS_X ::= OPERACION:a {: RESULT=a; :} ;
+
+	POS_Y ::= OPERACION:a {: RESULT=a; :} ;
+
+	RADIO ::= OPERACION:a {: RESULT=a;  :} ;
+
+        LADO ::= OPERACION:a {: RESULT=a; :} ;
+
+        ALTO ::= OPERACION:a {: RESULT=a; :} ;
+
+	ANCHO ::= OPERACION:a {: RESULT=a; :} ;
+
+        LADOS ::= OPERACION:a {: RESULT=a;  :} ;
+	
+        POS_DX ::= OPERACION:a {: RESULT=a; :} ;
+
+	POS_DY ::= OPERACION:a {: RESULT=a; :} ;
+
+
+	COLOR  ::=  color:clr
+	{: 
+        RESULT = (String)clr; :}
+        ;
+
+
+        TIPO_ANIMACION  ::=  linea:tipoAnima
+	{: 
+            
+            RESULT = (String)tipoAnima; 
+        :}
+        |       curva:tipoAnima
+        {:
+          RESULT = (String)tipoAnima; 
+        :} 
+        ;
+
+	OPERACION ::= OPERACION:a mas OPERACION:b {:  RESULT = a + b; :}
+	|    OPERACION:a menos OPERACION:b {:  RESULT = a - b; :}
+	|    OPERACION:a por OPERACION:b {:  RESULT = a * b; :}
+	|    OPERACION:a div OPERACION:b {:  RESULT = a / b; :}
+        |   menos OPERACION:b   {: RESULT = -b; :} %prec umenos
+        |   mas OPERACION:b   {: RESULT = b; :} %prec umas
+        |   parentesis_a OPERACION:a parentesis_b {: RESULT=a; :}
+	|    NUM:a {: RESULT= a; :}
+        ;
+
+	NUM ::= numero:a {:  RESULT = (Integer)a; :}
+        ;
